@@ -133,61 +133,15 @@ public class ApplicationScreen extends javax.swing.JFrame {
         
         jLabel4.setText(" ");
         
-        RowsMultiThreadingTester rmtt1 = new RowsMultiThreadingTester(0);
-        RowsMultiThreadingTester rmtt2 = new RowsMultiThreadingTester(1);
-        RowsMultiThreadingTester rmtt3 = new RowsMultiThreadingTester(2);
-        RowsMultiThreadingTester rmtt4 = new RowsMultiThreadingTester(3);
-        RowsMultiThreadingTester rmtt5 = new RowsMultiThreadingTester(4);
-        RowsMultiThreadingTester rmtt6 = new RowsMultiThreadingTester(5);
-        RowsMultiThreadingTester rmtt7 = new RowsMultiThreadingTester(6);
-        RowsMultiThreadingTester rmtt8 = new RowsMultiThreadingTester(7);
-        RowsMultiThreadingTester rmtt9 = new RowsMultiThreadingTester(8);
-        ColumnsMultiThreadingTester cmtt1 = new ColumnsMultiThreadingTester(1);
-        ColumnsMultiThreadingTester cmtt2 = new ColumnsMultiThreadingTester(2);
-        ColumnsMultiThreadingTester cmtt3 = new ColumnsMultiThreadingTester(3);
-        ColumnsMultiThreadingTester cmtt4 = new ColumnsMultiThreadingTester(4);
-        ColumnsMultiThreadingTester cmtt5 = new ColumnsMultiThreadingTester(5);
-        ColumnsMultiThreadingTester cmtt6 = new ColumnsMultiThreadingTester(6);
-        ColumnsMultiThreadingTester cmtt7 = new ColumnsMultiThreadingTester(7);
-        ColumnsMultiThreadingTester cmtt8 = new ColumnsMultiThreadingTester(8);
-        ColumnsMultiThreadingTester cmtt9 = new ColumnsMultiThreadingTester(9);
-        BlocksMultiThreadingTester bmtt1 = new BlocksMultiThreadingTester(2,1,0,2);
-        BlocksMultiThreadingTester bmtt2 = new BlocksMultiThreadingTester(5,1,0,2);
-        BlocksMultiThreadingTester bmtt3 = new BlocksMultiThreadingTester(8,1,0,2);
-        BlocksMultiThreadingTester bmtt4 = new BlocksMultiThreadingTester(2,4,3,5);
-        BlocksMultiThreadingTester bmtt5 = new BlocksMultiThreadingTester(5,4,3,5);
-        BlocksMultiThreadingTester bmtt6 = new BlocksMultiThreadingTester(8,4,3,5);
-        BlocksMultiThreadingTester bmtt7 = new BlocksMultiThreadingTester(2,7,6,8);
-        BlocksMultiThreadingTester bmtt8 = new BlocksMultiThreadingTester(5,7,6,8);
-        BlocksMultiThreadingTester bmtt9 = new BlocksMultiThreadingTester(8,7,6,8);
+        for(int i = 0; i<=8;i++){
+            RowsMultiThreadingTester rmtt = new RowsMultiThreadingTester(i);
+            ColumnsMultiThreadingTester cmtt = new ColumnsMultiThreadingTester(i+1);
+            BlocksMultiThreadingTester bmtt = new BlocksMultiThreadingTester(i+1);
+            rmtt.start();
+            cmtt.start();
+            bmtt.start();
         
-        rmtt1.start();
-        rmtt2.start();
-        rmtt3.start();
-        rmtt4.start();
-        rmtt5.start();
-        rmtt6.start();
-        rmtt7.start();
-        rmtt8.start();
-        rmtt9.start();
-        cmtt1.start();
-        cmtt2.start();
-        cmtt3.start();
-        cmtt4.start();
-        cmtt5.start();
-        cmtt6.start();
-        cmtt7.start();
-        cmtt8.start();
-        cmtt9.start();
-        bmtt1.start();
-        bmtt2.start();
-        bmtt3.start();
-        bmtt4.start();
-        bmtt5.start();
-        bmtt6.start();
-        bmtt7.start();
-        bmtt8.start();
-        bmtt9.start();        
+        }
         
         if(" ".equals(jLabel4.getText())){
             testing.sudoku.solution.ApplicationScreen.jLabel4.setText("Valid solution ;D");

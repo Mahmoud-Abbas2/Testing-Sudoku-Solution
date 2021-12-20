@@ -28,40 +28,49 @@ public class ColumnsMultiThreadingTester extends Thread {
     int anotherCellValue = 0;
     String invalidSolution = "";
 
+    int invalidEntry = 0;
+
     @Override
     public void run() {
 
-        for (int row = 0; row <= 7; row++) {
+        for (int row = 0; row <= 8; row++) {
             try {
-                currentCellValue = Integer.valueOf(String.valueOf(model.getValueAt(row, columnNumber)));
+                Integer.valueOf(String.valueOf(model.getValueAt(row, columnNumber)));
+                invalidEntry = 0;
+            } catch (Exception e) {
+                invalidEntry = 1;
+                testing.sudoku.solution.ApplicationScreen.jLabel4.setText("Only integers are allowed");
+                testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
+                break;
+            }
+        }
 
-                for (int i = row + 1; i <= 8; i++) {
-                    try {
-                        anotherCellValue = Integer.valueOf(String.valueOf(model.getValueAt(i, columnNumber)));
-                        if ((currentCellValue >= 1 && currentCellValue <= 9) && (anotherCellValue >= 1 && anotherCellValue <= 9)) {
-                            if (currentCellValue == anotherCellValue) {
-                                invalidSolution = "Invalid Sudoku Solution";
-                                testing.sudoku.solution.ApplicationScreen.jLabel4.setText(invalidSolution + " D:");
+        if (invalidEntry != 1) {
+            for (int row = 0; row <= 7; row++) {
+                
+                    currentCellValue = Integer.valueOf(String.valueOf(model.getValueAt(row, columnNumber)));
+
+                    for (int i = row + 1; i <= 8; i++) {
+                        
+                            anotherCellValue = Integer.valueOf(String.valueOf(model.getValueAt(i, columnNumber)));
+                            if ((currentCellValue >= 1 && currentCellValue <= 9) && (anotherCellValue >= 1 && anotherCellValue <= 9)) {
+                                if (currentCellValue == anotherCellValue) {
+                                    invalidSolution = "Invalid Sudoku Solution";
+                                    testing.sudoku.solution.ApplicationScreen.jLabel4.setText(invalidSolution + " D:");
+                                    testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
+                                    break;
+                                }
+                            } else {
+                                testing.sudoku.solution.ApplicationScreen.jLabel4.setText("Allowed integers (1-9)");
                                 testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
                                 break;
                             }
-                        } else {
-                            testing.sudoku.solution.ApplicationScreen.jLabel4.setText("Allowe numbers (1-9)");
-                            testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
-                            break;
-                        }
-                    } catch (Exception e) {
-                        testing.sudoku.solution.ApplicationScreen.jLabel4.setText("Allowed numbers (1-9)");
-                        testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
+                        
                     }
-                }
-                if ("Invalid Sudoku Solution".equals(invalidSolution) && "Allowe numbers (1-9)".equals(testing.sudoku.solution.ApplicationScreen.jLabel4.getText())) {
-                    break;
-                }
-            } catch (Exception e) {
-                testing.sudoku.solution.ApplicationScreen.jLabel4.setText("can't accept letters");
-                testing.sudoku.solution.ApplicationScreen.jLabel4.setForeground(Color.red);
-                break;
+                    if ("Invalid Sudoku Solution".equals(invalidSolution) && "Allowed integerss (1-9)".equals(testing.sudoku.solution.ApplicationScreen.jLabel4.getText())) {
+                        break;
+                    }
+                
             }
         }
 
